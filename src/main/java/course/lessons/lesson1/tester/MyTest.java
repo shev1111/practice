@@ -1,9 +1,10 @@
 package course.lessons.lesson1.tester;
 
-import org.lesson1.tester.annotations.AfterClass;
-import org.lesson1.tester.annotations.Before;
-import org.lesson1.tester.annotations.BeforeClass;
-import org.lesson1.tester.annotations.Test;
+
+import course.lessons.lesson1.tester.annotations.AfterClass;
+import course.lessons.lesson1.tester.annotations.Before;
+import course.lessons.lesson1.tester.annotations.BeforeClass;
+import course.lessons.lesson1.tester.annotations.Test;
 
 public class MyTest {
 

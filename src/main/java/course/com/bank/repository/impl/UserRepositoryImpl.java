@@ -10,41 +10,30 @@ import java.util.Map;
 import java.util.Optional;
 
 public class UserRepositoryImpl implements UserRepository {
-    private static final User DEFAULT_USER;
+
     private final Map<Integer, User> userIdToUser = new HashMap<>();
 
-    static {
-        DEFAULT_USER = User.builder()
-                .withEmail("no email")
-                .withPassword("password")
-                .withAccounts(null)
-                .build();
-    }
+
 
     @Override
-    public User findByEmail(String email) {
+    public Optional<User> findByEmail(String email) {
         Optional<User> userOptional;
         userOptional = userIdToUser.entrySet().
                 stream().
                 filter(element -> element.getValue().getEmail().equals(email)).
                 findFirst().
                 map(Map.Entry::getValue);
-        return userOptional.orElse(DEFAULT_USER);
+        return userOptional;
     }
 
     @Override
     public void save(User entity) {
-        if(entity!=null){
-            userIdToUser.put(entity.getId(),entity);
-        }
-
-
+        userIdToUser.put(entity.getId(),entity);
     }
 
     @Override
-    public User findById(Integer id) {
-        Optional<User> userOptional = Optional.ofNullable(userIdToUser.get(id));
-        return userOptional.orElse(DEFAULT_USER);
+    public Optional<User> findById(Integer id) {
+        return Optional.ofNullable(userIdToUser.get(id));
     }
 
     @Override

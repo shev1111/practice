@@ -5,6 +5,7 @@ import course.com.bank.repository.AccountRepository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class AccountRepositoryImpl implements AccountRepository {
 
@@ -19,8 +20,8 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public Account findById(Integer id) {
-        return accountIdToAccount.get(id);
+    public Optional<Account> findById(Integer id) {
+        return Optional.ofNullable(accountIdToAccount.get(id));
     }
 
     @Override

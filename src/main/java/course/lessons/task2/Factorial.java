@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.logging.SocketHandler;
 
 public class Factorial {
+
     static BigInteger calculate (String number){
         BigInteger bigIntegerNumber = new BigInteger(number);
         BigInteger factorial = BigInteger.ONE;

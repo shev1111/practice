@@ -1,13 +1,14 @@
 package course.com.bank.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CrudRepository<E> {
     //creat
     void save(E entity);
 
     //read
-    E findById(Integer id);
+   Optional <E> findById(Integer id);
 
     List<E> findAll();
 
