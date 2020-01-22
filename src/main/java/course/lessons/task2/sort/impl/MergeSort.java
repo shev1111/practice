@@ -5,6 +5,7 @@ import course.lessons.task2.sort.Sortable;
 import java.util.Arrays;
 
 public class MergeSort implements Sortable {
+
     @Override
     public int[] sort(int[] array) {
         int length = array.length;
@@ -23,6 +24,8 @@ public class MergeSort implements Sortable {
 
         return array;
     }
+
+
 
     private void merge(int[] outputArray, int[] leftArray, int[] rightArray) {
         int leftIndex = 0;

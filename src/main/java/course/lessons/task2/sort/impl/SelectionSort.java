@@ -17,9 +17,6 @@ public class SelectionSort implements Sortable {
                     minId = minIndex;
                 }
             }
-            /*int temp = array[arrIndex];
-            array[arrIndex] = min;
-            array[minId] = temp;*/
             SortUtils.swapArrayElements(array,arrIndex,minId);
         }
         return array;

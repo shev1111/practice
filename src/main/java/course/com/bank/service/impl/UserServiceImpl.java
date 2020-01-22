@@ -37,11 +37,20 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    public User register (User user){
-        if(userValidator.validate(user)){
-            userRepository.save(user);
+    public boolean register (User user){
+        boolean registered = false;
+        try {
+            if(userValidator.validate(user)){
+                user.setEncryptedPassword(passwordEncryption.encrypt(user.getPassword()));
+                userRepository.save(user);
+                registered = userRepository.findByEmail(user.getEmail()).
+                                            orElse(User.builder().build()).
+                                            equals(user);
+            }
+        } catch (EncryptionException e) {
+            registered = false;
         }
 
-        return user;
+        return registered;
     }
 }

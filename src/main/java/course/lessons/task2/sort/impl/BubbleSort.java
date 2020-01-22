@@ -12,9 +12,6 @@ public class BubbleSort implements Sortable {
             sorted = true;
             for (int index = 0; index < array.length - 1; index++) {
                 if (array[index] > array[index+1]) {
-                    /*temp = array[index];
-                    array[index] = array[index+1];
-                    array[index+1] = temp;*/
                     SortUtils.swapArrayElements(array,index,index+1);
                     sorted = false;
                 }

@@ -7,7 +7,7 @@ import static course.com.bank.utility.CollectionUtility.nullSafeListInitialize;
 public class User {
     private final Integer id;
     private final String email;
-    private final String password;
+    private String password;
     private final List<Account> accounts;
 
     private User(Builder builder) {
@@ -27,6 +27,10 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setEncryptedPassword(String encryptedPassword){
+        this.password = encryptedPassword;
     }
 
     public List<Account> getAccounts() {
