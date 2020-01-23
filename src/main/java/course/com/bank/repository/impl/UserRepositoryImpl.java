@@ -4,10 +4,8 @@ package course.com.bank.repository.impl;
 
 import course.com.bank.domain.User;
 import course.com.bank.repository.UserRepository;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+
+import java.util.*;
 
 public class UserRepositoryImpl implements UserRepository {
 
@@ -18,11 +16,8 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public Optional<User> findByEmail(String email) {
         Optional<User> userOptional;
-        userOptional = userIdToUser.entrySet().
-                stream().
-                filter(element -> element.getValue().getEmail().equals(email)).
-                findFirst().
-                map(Map.Entry::getValue);
+        userOptional = userIdToUser.values().stream().filter(user -> user.getEmail().equals(email)).findAny();
+
         return userOptional;
     }
 
@@ -37,8 +32,9 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> findAll() {
-        return (List<User>) userIdToUser.values();
+    public List<User> findAll(int page, int itemsPerPage) {
+        //pagination
+        return new ArrayList<>(userIdToUser.values());
     }
 
     @Override
@@ -52,5 +48,10 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public void deleteById(Integer id) {
         userIdToUser.remove(id);
+    }
+
+    @Override
+    public long count() {
+        return userIdToUser.size();
     }
 }

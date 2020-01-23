@@ -25,7 +25,7 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public List<Account> findAll() {
+    public List<Account> findAll(int page, int itemsPerPage) {
         return (List<Account>) accountIdToAccount.values();
     }
 
@@ -40,5 +40,10 @@ public class AccountRepositoryImpl implements AccountRepository {
     @Override
     public void deleteById(Integer id) {
         accountIdToAccount.remove(id);
+    }
+
+    @Override
+    public long count() {
+        return accountIdToAccount.size();
     }
 }
