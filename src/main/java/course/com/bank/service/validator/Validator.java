@@ -1,5 +1,5 @@
 package course.com.bank.service.validator;
 
 public interface Validator<T> {
-    boolean validate(T entity);
+    void validate(T entity);
 }

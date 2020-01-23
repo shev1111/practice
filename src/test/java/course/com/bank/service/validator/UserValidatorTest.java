@@ -7,14 +7,12 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class UserValidatorTest {
-    private static User validUser = User.builder().withEmail("test@mail.com").withPassword("password").build();
-    private static User invalidUser = User.builder().withEmail("testmail.com").withPassword("").build();
+    private static User invalidUser = User.builder().withEmail("testmail.com").withPassword("").withTelephoneNumber("+589674").build();
     private static UserValidator userValidator = new UserValidator();
 
-    @Test
-    public void validateTest() {
-        assertTrue(userValidator.validate(validUser));
-        assertFalse(userValidator.validate(invalidUser));
+   @Test(expected = ValidateException.class )
+    public void validateExceptionTest() {
+        userValidator.validate(invalidUser);
     }
 
 }

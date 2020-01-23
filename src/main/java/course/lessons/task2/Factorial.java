@@ -1,7 +1,6 @@
 package course.lessons.task2;
 
 import java.math.BigInteger;
-import java.util.logging.SocketHandler;
 
 public class Factorial {
 

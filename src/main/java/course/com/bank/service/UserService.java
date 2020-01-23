@@ -2,9 +2,11 @@ package course.com.bank.service;
 
 import course.com.bank.domain.User;
 
+import java.util.Optional;
+
 public interface UserService {
 
     boolean login(String email, String password);
 
-    boolean register(User user);
+    Optional<User> register(User user);
 }
