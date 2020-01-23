@@ -12,19 +12,19 @@ import static course.com.bank.view.Commands.UA;
 import static course.com.bank.view.Commands.ENG;
 
 public class MenuController {
-    private final UserService USER_SERVICE = ApplicationInjector.getUserService();
-    private final View VIEW;
+    private  UserService userService = ApplicationInjector.getUserService();
+    private View view;
 
     public MenuController(){
-        VIEW = new View();
+        view = new View();
     }
 
     public void run(){
         initUserRepository();
-        VIEW.print(View.SELECT_LANGUAGE);
-        VIEW.print(View.SEPARATOR);
+        view.print(View.SELECT_LANGUAGE);
+        view.print(View.SEPARATOR);
         selectLanguage();
-        VIEW.print(Multilingual.getResource().getString("welcome"));
+        view.print(Multilingual.getResource().getString("welcome"));
 
         while (true) {
             String input = InputData.input().replaceAll("\\s+", " ").trim();
@@ -33,7 +33,7 @@ public class MenuController {
 
             if (input.matches(Commands.CMD_FIND_ALL_USERS)) {
                 int pageNumber = Integer.parseInt(input.split("\\s")[1]);
-                VIEW.printCollection(USER_SERVICE.findAll(pageNumber).getItems());
+                view.printCollection(userService.findAll(pageNumber).getItems());
             }
         }
     }
@@ -53,8 +53,8 @@ public class MenuController {
                     if(input.equals(" ") || input.isEmpty()) {
                         break;
                     }
-                    VIEW.printErr("incorrect language");
-                    VIEW.println(View.SELECT_LANGUAGE);
+                    view.printErr("incorrect language");
+                    view.println(View.SELECT_LANGUAGE);
             }
         }
     }
@@ -65,7 +65,7 @@ public class MenuController {
                     withPassword("password@01A"+index).
                     withTelephoneNumber("+38097544216"+index).
                     build();
-            USER_SERVICE.register(user);
+            userService.register(user);
 
         }
     }

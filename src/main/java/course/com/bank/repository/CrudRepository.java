@@ -15,5 +15,5 @@ public interface CrudRepository<E> {
 
     void deleteById(Integer id);
 
-    long count();
+    int count();
 }

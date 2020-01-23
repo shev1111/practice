@@ -4,7 +4,6 @@ import course.com.bank.domain.Account;
 import course.com.bank.repository.AccountRepository;
 import course.com.bank.repository.Page;
 import course.com.bank.repository.Pageable;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +52,7 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public long count() {
+    public int count() {
         return accountIdToAccount.size();
     }
 }

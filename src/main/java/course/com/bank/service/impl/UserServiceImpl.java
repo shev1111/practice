@@ -7,8 +7,6 @@ import course.com.bank.repository.UserRepository;
 import course.com.bank.service.UserService;
 import course.com.bank.service.security.Encryption;
 import course.com.bank.service.validator.Validator;
-
-import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
@@ -45,6 +43,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Pageable<User> findAll(int page) {
+        if(page<=0){
+            page=1;
+        }
+        if(page>userRepository.count()){
+            page=userRepository.count()/USER_PER_PAGE;
+        }
         return userRepository.findAll(new Page(page, USER_PER_PAGE));
     }
 }

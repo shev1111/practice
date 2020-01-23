@@ -51,4 +51,9 @@ public class UserServiceImplTest {
         assertFalse(userService.login("test@mail.com", "qwerty5678"));
     }
 
+    @Test
+    public void findAllTest() throws Exception {
+        //userService.findAll(1);
+    }
+
 }

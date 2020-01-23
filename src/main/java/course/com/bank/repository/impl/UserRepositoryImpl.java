@@ -17,7 +17,6 @@ public class UserRepositoryImpl implements UserRepository {
     public Optional<User> findByEmail(String email) {
         Optional<User> userOptional;
         userOptional = userIdToUser.values().stream().filter(user -> user.getEmail().equals(email)).findAny();
-
         return userOptional;
     }
 
@@ -34,14 +33,13 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public Pageable<User> findAll(Page page) {
         int userNumberToSkip = page.getPageNumber()*page.getItemsPerPage()-page.getItemsPerPage();
+
         List<User> users = userIdToUser.values().stream().
                 skip(userNumberToSkip).
                 limit(page.getItemsPerPage()).
                 collect(Collectors.toList());
-        for (User user:users) {
-            System.out.println(user);
-        }
         int maxPageNumber = userIdToUser.size()/page.getItemsPerPage();
+
         return new Pageable<>(users, page, maxPageNumber);
     }
 
@@ -50,7 +48,6 @@ public class UserRepositoryImpl implements UserRepository {
         if(entity!=null&&entity.getId()!=null){
             userIdToUser.put(entity.getId(), entity);
         }
-
     }
 
     @Override
@@ -59,7 +56,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public long count() {
+    public int count() {
         return userIdToUser.size();
     }
 }
