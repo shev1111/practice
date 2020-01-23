@@ -10,7 +10,7 @@ public interface CrudRepository<E> {
     //read
    Optional <E> findById(Integer id);
 
-    List<E> findAll();
+    List<E> findAll(int page, int itemsPerPage);
 
     //update
 
@@ -18,4 +18,6 @@ public interface CrudRepository<E> {
 
     //
     void deleteById(Integer id);
+
+    long count();
 }

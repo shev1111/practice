@@ -9,7 +9,5 @@ public class UserValidator implements Validator<User> {
         return  entity != null &&
                 entity.getEmail().matches("^(.+)@(.+)$") &&
                 entity.getPassword().matches("^.{8,}$");
-
-
     }
 }
