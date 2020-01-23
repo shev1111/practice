@@ -1,17 +1,17 @@
 package course.com.bank.repository.impl;
 
-
-
 import course.com.bank.domain.User;
+import course.com.bank.repository.Page;
+import course.com.bank.repository.Pageable;
 import course.com.bank.repository.UserRepository;
-
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class UserRepositoryImpl implements UserRepository {
-
     private final Map<Integer, User> userIdToUser = new HashMap<>();
-
-
 
     @Override
     public Optional<User> findByEmail(String email) {
@@ -32,9 +32,17 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> findAll(int page, int itemsPerPage) {
-        //pagination
-        return new ArrayList<>(userIdToUser.values());
+    public Pageable<User> findAll(Page page) {
+        int userNumberToSkip = page.getPageNumber()*page.getItemsPerPage()-page.getItemsPerPage();
+        List<User> users = userIdToUser.values().stream().
+                skip(userNumberToSkip).
+                limit(page.getItemsPerPage()).
+                collect(Collectors.toList());
+        for (User user:users) {
+            System.out.println(user);
+        }
+        int maxPageNumber = userIdToUser.size()/page.getItemsPerPage();
+        return new Pageable<>(users, page, maxPageNumber);
     }
 
     @Override

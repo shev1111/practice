@@ -2,10 +2,14 @@ package course.com.bank.repository.impl;
 
 import course.com.bank.domain.Account;
 import course.com.bank.repository.AccountRepository;
+import course.com.bank.repository.Page;
+import course.com.bank.repository.Pageable;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class AccountRepositoryImpl implements AccountRepository {
 
@@ -25,8 +29,14 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public List<Account> findAll(int page, int itemsPerPage) {
-        return (List<Account>) accountIdToAccount.values();
+    public Pageable<Account> findAll(Page page) {
+        int userNumberToSkip = page.getPageNumber()*page.getItemsPerPage()-page.getItemsPerPage();
+        List<Account> accounts = accountIdToAccount.values().stream().
+                skip(userNumberToSkip).
+                limit(page.getItemsPerPage()).
+                collect(Collectors.toList());
+        int maxPageNumber = accountIdToAccount.size()/page.getItemsPerPage();
+        return new Pageable<>(accounts, page, maxPageNumber);
     }
 
     @Override

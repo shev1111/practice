@@ -4,6 +4,7 @@ import course.com.bank.domain.User;
 import course.com.bank.injector.ApplicationInjector;
 import course.com.bank.service.UserService;
 import course.com.bank.service.validator.ValidateException;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import java.util.Optional;
@@ -20,8 +21,12 @@ public class UserServiceImplTest {
     @BeforeClass
     public static void init(){
         userService = ApplicationInjector.getUserService();
-        validUser = User.builder().withEmail("test@mail.com").withPassword("password@01A").withId(1).withTelephoneNumber("+380975992054").build();
         invalidUser = User.builder().withEmail("mail").withPassword("pass").withId(2).build();
+    }
+
+    @Before
+    public void beforeTest(){
+        validUser = User.builder().withEmail("test@mail.com").withPassword("password@01A").withId(1).withTelephoneNumber("+380975992054").build();
     }
 
     @Test

@@ -9,7 +9,7 @@ public interface CrudRepository<E> {
 
    Optional <E> findById(Integer id);
 
-    List<E> findAll(int page, int itemsPerPage);
+    Pageable<E> findAll(Page page);
 
     void update(E entity);
 
